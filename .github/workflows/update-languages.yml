@@ -1,1 +1,37 @@
+name: Atualizar linguagens
 
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  update-languages:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Gerar gráficos
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_USERNAME: opaulofelipe
+        run: python scripts/generate_languages.py
+
+      - name: Salvar atualização
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add profile/languages-light.svg profile/languages-dark.svg
+          git diff --cached --quiet && exit 0
+          git commit -m "Atualiza linguagens mais usadas"
+          git push
