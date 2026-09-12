@@ -2,14 +2,23 @@ name: Atualizar linguagens
 
 on:
   workflow_dispatch:
+
+  push:
+    branches:
+      - main
+    paths:
+      - "README.md"
+      - "scripts/generate_languages.py"
+      - ".github/workflows/update-languages.yml"
+
   schedule:
-    - cron: "0 3 * * *"
+    - cron: "17 3 * * *"
 
 permissions:
   contents: write
 
 jobs:
-  update-languages:
+  update:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,15 +32,22 @@ jobs:
 
       - name: Gerar gráficos
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
           GITHUB_USERNAME: opaulofelipe
-        run: python scripts/generate_languages.py
+        run: python3 scripts/generate_languages.py
 
-      - name: Salvar atualização
+      - name: Salvar gráficos no repositório
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add profile/languages-light.svg profile/languages-dark.svg
-          git diff --cached --quiet && exit 0
-          git commit -m "Atualiza linguagens mais usadas"
-          git push
+
+          git add profile/languages-light.svg
+          git add profile/languages-dark.svg
+
+          if git diff --cached --quiet; then
+            echo "Nenhuma alteração nas estatísticas."
+            exit 0
+          fi
+
+          git commit -m "Atualiza estatísticas de linguagens"
+          git push origin HEAD:main
