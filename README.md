@@ -3,11 +3,11 @@
 ## Linguagens mais usadas
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/opaulofelipe/opaulofelipe/main/profile/languages-dark.svg?v=1792223304">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/opaulofelipe/opaulofelipe/main/profile/languages-light.svg?v=1792223304">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/opaulofelipe/opaulofelipe/main/profile/languages-dark.svg?v=1792310543">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/opaulofelipe/opaulofelipe/main/profile/languages-light.svg?v=1792310543">
   <img
     alt="As 6 linguagens mais usadas por Paulo Felipe no GitHub"
-    src="https://raw.githubusercontent.com/opaulofelipe/opaulofelipe/main/profile/languages-light.svg?v=1792223304"
+    src="https://raw.githubusercontent.com/opaulofelipe/opaulofelipe/main/profile/languages-light.svg?v=1792310543"
     width="640"
   >
 </picture>
